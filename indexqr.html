@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환경 진로 탐색 도구 모음</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .container {
+            transition: all 0.5s ease-in-out;
+        }
+        .bingo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+        .bingo-cell {
+            background-color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 80px;
+        }
+        .bingo-cell.selected {
+            background-color: #84cc16;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 p-8 min-h-screen flex flex-col items-center justify-center">
+
+    <!-- 메인 QR 코드 페이지 -->
+    <div id="qr-main-page" class="container bg-white rounded-3xl shadow-xl p-8 md:p-12 max-w-4xl w-full text-center">
+        <h1 class="text-4xl font-extrabold text-blue-700 mb-4">환경 진로 탐색 도구 모음</h1>
+        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            아래 QR 코드를 스캔하여 다양한 환경 진로 탐색 도구에 접속할 수 있습니다.
+            스마트폰 카메라로 각 QR 코드를 비추어 보세요.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- 1. 진로 유형 검사 (RIASEC) -->
+            <div class="bg-blue-50 p-6 rounded-2xl shadow-md flex flex-col items-center">
+                <h2 class="text-2xl font-bold text-blue-600 mb-4">1. 진로 유형 검사</h2>
+                <p class="text-gray-700 mb-6">
+                    새롭게 RIASEC 모델로 개편된 검사를 통해 나의 환경 진로 유형을 파악해 보세요.
+                </p>
+                <div class="p-2 bg-white rounded-lg shadow-inner">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sunnynaranaver-sketch.github.io/job/index.html%23riasec-test" alt="환경 진로 유형 검사 QR 코드" class="w-40 h-40 rounded-lg">
+                </div>
+            </div>
+
+            <!-- 2. 진로 유형 심화 검사 -->
+            <div class="bg-green-50 p-6 rounded-2xl shadow-md flex flex-col items-center">
+                <h2 class="text-2xl font-bold text-green-600 mb-4">2. 심화 유형 검사</h2>
+                <p class="text-gray-700 mb-6">
+                    새롭게 RIASEC 모델로 개편된 심화 검사를 통해 더 깊이 알아보고 상세한 정보를 확인하세요.
+                </p>
+                <div class="p-2 bg-white rounded-lg shadow-inner">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sunnynaranaver-sketch.github.io/job/index.html%23riasec-advanced" alt="진로 유형 심화 검사 QR 코드" class="w-40 h-40 rounded-lg">
+                </div>
+            </div>
+
+            <!-- 3. 환경 진로 빙고 게임 -->
+            <div class="bg-purple-50 p-6 rounded-2xl shadow-md flex flex-col items-center">
+                <h2 class="text-2xl font-bold text-purple-600 mb-4">3. 진로 빙고 게임</h2>
+                <p class="text-gray-700 mb-6">
+                    다양한 환경 직업들을 탐색하며 나만의 빙고를 완성해 보세요.
+                </p>
+                <div class="p-2 bg-white rounded-lg shadow-inner">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sunnynaranaver-sketch.github.io/job/index.html%23bingo-game" alt="환경 진로 빙고 게임 QR 코드" class="w-40 h-40 rounded-lg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 진로 유형 검사 페이지 (기능 추가) -->
+    <div id="riasec-test" class="container hidden bg-white rounded-3xl shadow-xl p-8 md:p-12 max-w-2xl w-full text-center">
+        <h1 class="text-3xl font-extrabold text-blue-700 mb-4">진로 유형 검사</h1>
+        <p class="text-lg text-gray-600 mb-6">
+            아래 질문에 답하고 나의 환경 진로 유형을 파악해 보세요.
+        </p>
+        <div id="riasec-questions" class="space-y-4">
+            <!-- 질문과 답변 옵션이 여기에 동적으로 추가됩니다 -->
+        </div>
+        <div id="riasec-result" class="hidden mt-8 text-left">
+            <h2 class="text-2xl font-bold text-blue-600 mb-4">결과</h2>
+            <p id="result-text" class="text-lg text-gray-700"></p>
+        </div>
+        <div class="mt-8">
+            <button onclick="navigate('qr-main-page')" class="bg-gray-500 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-gray-600 transition-all">
+                뒤로 가기
+            </button>
+        </div>
+    </div>
+
+    <!-- 진로 유형 심화 검사 페이지 (기능 추가) -->
+    <div id="riasec-advanced" class="container hidden bg-white rounded-3xl shadow-xl p-8 md:p-12 max-w-2xl w-full text-center">
+        <h1 class="text-3xl font-extrabold text-green-600 mb-4">진로 유형 심화 검사</h1>
+        <p class="text-lg text-gray-600 mb-6">
+            심화 검사를 통해 나의 환경 진로 유형을 더 깊이 알아보고, 상세한 직업 및 학과 정보를 확인하세요.
+        </p>
+        <!-- 여기에는 심화 검사 문항이나 결과가 추가될 수 있습니다. -->
+        <p class="text-sm text-gray-400 mt-6">
+            이 페이지는 심화 검사 내용을 보여주기 위한 페이지입니다. 실제 심화 검사 항목을 추가하려면 이 부분을 수정하면 됩니다.
+        </p>
+        <div class="mt-8">
+            <button onclick="navigate('qr-main-page')" class="bg-gray-500 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-gray-600 transition-all">
+                뒤로 가기
+            </button>
+        </div>
+    </div>
+
+    <!-- 진로 빙고 게임 페이지 (기능 추가) -->
+    <div id="bingo-game" class="container hidden bg-white rounded-3xl shadow-xl p-8 md:p-12 max-w-2xl w-full text-center">
+        <h1 class="text-3xl font-extrabold text-purple-600 mb-4">진로 빙고 게임</h1>
+        <p class="text-lg text-gray-600 mb-6">
+            다양한 환경 직업들을 탐색하며 나만의 빙고를 완성해 보세요.
+        </p>
+        <div id="bingo-board" class="bingo-grid w-full">
+            <!-- 빙고 칸이 여기에 동적으로 추가됩니다 -->
+        </div>
+        <div id="bingo-message" class="hidden mt-4 text-xl font-bold text-red-500">
+            <!-- 빙고 메시지가 여기에 표시됩니다 -->
+        </div>
+        <div class="mt-8">
+            <button onclick="resetBingo()" class="bg-purple-500 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-purple-600 transition-all">
+                게임 다시 시작
+            </button>
+            <button onclick="navigate('qr-main-page')" class="bg-gray-500 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-gray-600 transition-all">
+                뒤로 가기
+            </button>
+        </div>
+    </div>
+
+    <script>
+        //-----------------------------------------------------
+        // 공통 페이지 네비게이션 로직
+        //-----------------------------------------------------
+        // URL 해시에 따라 페이지를 렌더링하는 함수
+        function renderPage() {
+            const pageId = window.location.hash ? window.location.hash.substring(1) : 'qr-main-page';
+            const pages = document.querySelectorAll('.container');
+
+            pages.forEach(page => {
+                if (page.id === pageId) {
+                    page.classList.remove('hidden');
+                } else {
+                    page.classList.add('hidden');
+                }
+            });
+            // 페이지가 로드될 때 각 기능의 초기화 함수 호출
+            if (pageId === 'riasec-test') initRiasacTest();
+            if (pageId === 'bingo-game') initBingoGame();
+        }
+
+        // 특정 페이지로 이동하는 함수
+        function navigate(pageId) {
+            window.location.hash = pageId;
+        }
+
+        // 페이지 로드 시 초기 페이지 렌더링
+        window.addEventListener('DOMContentLoaded', renderPage);
+
+        // URL 해시가 변경될 때마다 페이지 렌더링
+        window.addEventListener('hashchange', renderPage);
+
+        //-----------------------------------------------------
+        // RIASEC 진로 유형 검사 기능
+        //-----------------------------------------------------
+        const riasecQuestions = [
+            { question: "환경 보호 단체에서 활동하는 것을 좋아한다.", type: "Social" },
+            { question: "환경 문제 해결을 위한 새로운 기술을 개발하고 싶다.", type: "Investigative" },
+            { question: "자연 경관을 그림으로 표현하거나 사진을 찍는 것을 즐긴다.", type: "Artistic" },
+            { question: "재활용품을 활용해 실용적인 물건을 만드는 것을 좋아한다.", type: "Realistic" },
+            { question: "친환경 제품을 판매하는 회사를 직접 운영해 보고 싶다.", type: "Enterprising" },
+            { question: "환경 관련 데이터를 정리하고 분석하는 일을 하고 싶다.", type: "Conventional" },
+            { question: "환경 캠페인을 기획하고 사람들에게 홍보하는 데 관심이 많다.", type: "Enterprising" },
+            { question: "환경 오염의 원인을 과학적으로 연구하는 것에 흥미를 느낀다.", type: "Investigative" },
+            { question: "야생동물을 보호하는 봉사 활동에 참여하고 싶다.", type: "Social" },
+            { question: "친환경 건축물을 설계하거나 만드는 것에 관심이 있다.", type: "Realistic" }
+        ];
+
+        let riasecScores = {
+            Realistic: 0,
+            Investigative: 0,
+            Artistic: 0,
+            Social: 0,
+            Enterprising: 0,
+            Conventional: 0
+        };
+
+        function initRiasacTest() {
+            const container = document.getElementById('riasec-questions');
+            const resultDiv = document.getElementById('riasec-result');
+            container.innerHTML = '';
+            resultDiv.classList.add('hidden');
+            riasecScores = { Realistic: 0, Investigative: 0, Artistic: 0, Social: 0, Enterprising: 0, Conventional: 0 };
+            
+            riasecQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = "bg-blue-100 p-4 rounded-xl shadow-inner";
+                questionDiv.innerHTML = `
+                    <p class="font-bold mb-2">${index + 1}. ${q.question}</p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <button onclick="handleRiasacAnswer('${q.type}', 1, this)" class="bg-white text-gray-700 py-1 px-3 rounded-full shadow-md hover:bg-blue-200">매우 그렇다</button>
+                        <button onclick="handleRiasacAnswer('${q.type}', 0.5, this)" class="bg-white text-gray-700 py-1 px-3 rounded-full shadow-md hover:bg-blue-200">그렇다</button>
+                        <button onclick="handleRiasacAnswer('${q.type}', 0, this)" class="bg-white text-gray-700 py-1 px-3 rounded-full shadow-md hover:bg-blue-200">보통이다</button>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function handleRiasacAnswer(type, score, button) {
+            // 이미 답변한 질문인지 확인
+            const questionDiv = button.closest('.bg-blue-100');
+            if (questionDiv.dataset.answered) return;
+
+            riasecScores[type] += score;
+            questionDiv.dataset.answered = true;
+            
+            // 답변 버튼 색상 변경
+            const buttons = questionDiv.querySelectorAll('button');
+            buttons.forEach(btn => btn.classList.remove('bg-blue-300'));
+            button.classList.add('bg-blue-300');
+
+            // 모든 질문에 답변했는지 확인
+            const answeredCount = Object.values(document.getElementById('riasec-questions').children).filter(div => div.dataset.answered).length;
+            if (answeredCount === riasecQuestions.length) {
+                showRiasacResult();
+            }
+        }
+
+        function showRiasacResult() {
+            const sortedScores = Object.entries(riasecScores).sort(([, a], [, b]) => b - a);
+            const topTwo = sortedScores.slice(0, 2).map(entry => entry[0]);
+            const resultText = document.getElementById('result-text');
+
+            let typeDescriptions = {
+                'Realistic': '현장형 (자연, 기계, 도구)',
+                'Investigative': '탐구형 (연구, 분석, 탐구)',
+                'Artistic': '예술형 (창의, 표현, 심미)',
+                'Social': '사회형 (봉사, 교육, 상담)',
+                'Enterprising': '진취형 (영향력, 리더십, 경영)',
+                'Conventional': '관습형 (자료 정리, 규정, 정확성)'
+            };
+
+            resultText.innerHTML = `
+                <p>나의 환경 진로 유형은 <b>${typeDescriptions[topTwo[0]]}</b>과 <b>${typeDescriptions[topTwo[1]]}</b>입니다.</p>
+                <p class="mt-4 text-sm text-gray-500">이 결과는 간단한 검사를 기반으로 한 것이며, 참고용으로 활용해 주세요.</p>
+            `;
+            document.getElementById('riasec-result').classList.remove('hidden');
+        }
+
+
+        //-----------------------------------------------------
+        // 진로 빙고 게임 기능
+        //-----------------------------------------------------
+        const bingoJobs = [
+            "환경 컨설턴트", "생태 복원가", "기후 변화 전문가", "재활용 디자이너", "지속가능성 매니저",
+            "자연 해설가", "친환경 건축가", "도시 농부", "수질 관리 연구원", "에너지 효율 전문가",
+            "환경 교육가", "환경 변호사", "녹색 기술 개발자", "동물 복지 전문가", "생물 다양성 연구원",
+            "폐기물 처리 전문가", "환경 공무원", "지열 에너지 기술자", "태양광 발전 기술자", "환경 디자이너",
+            "환경 심리학자", "탄소 배출권 거래 전문가", "환경 기자", "환경 영향 평가원", "바다 생태학자"
+        ];
+        
+        let bingoCells = [];
+
+        function initBingoGame() {
+            const board = document.getElementById('bingo-board');
+            const message = document.getElementById('bingo-message');
+            board.innerHTML = '';
+            message.classList.add('hidden');
+            
+            // 직업 목록 섞기
+            const shuffledJobs = bingoJobs.sort(() => Math.random() - 0.5);
+
+            bingoCells = [];
+            for (let i = 0; i < 25; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'bingo-cell';
+                cell.textContent = shuffledJobs[i];
+                cell.dataset.index = i;
+                cell.onclick = () => selectBingoCell(cell);
+                board.appendChild(cell);
+                bingoCells.push({ element: cell, isSelected: false });
+            }
+        }
+
+        function selectBingoCell(cell) {
+            const index = parseInt(cell.dataset.index);
+            const cellState = bingoCells[index];
+            
+            cellState.isSelected = !cellState.isSelected;
+            cell.classList.toggle('selected', cellState.isSelected);
+
+            checkBingo();
+        }
+
+        function checkBingo() {
+            const board = document.getElementById('bingo-board');
+            const message = document.getElementById('bingo-message');
+            let bingoCount = 0;
+
+            // 가로 확인
+            for (let i = 0; i < 5; i++) {
+                if (bingoCells.slice(i * 5, i * 5 + 5).every(c => c.isSelected)) bingoCount++;
+            }
+            // 세로 확인
+            for (let i = 0; i < 5; i++) {
+                if ([0, 1, 2, 3, 4].every(j => bingoCells[i + j * 5].isSelected)) bingoCount++;
+            }
+            // 대각선 확인 (왼쪽 위 -> 오른쪽 아래)
+            if ([0, 6, 12, 18, 24].every(i => bingoCells[i].isSelected)) bingoCount++;
+            // 대각선 확인 (오른쪽 위 -> 왼쪽 아래)
+            if ([4, 8, 12, 16, 20].every(i => bingoCells[i].isSelected)) bingoCount++;
+
+            if (bingoCount > 0) {
+                message.textContent = `${bingoCount}개 빙고 완성! 🎉`;
+                message.classList.remove('hidden');
+            } else {
+                message.classList.add('hidden');
+            }
+        }
+
+        function resetBingo() {
+            initBingoGame();
+        }
+    </script>
+</body>
+</html>
