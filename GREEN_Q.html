@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GREEN_Q</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #e0f7fa; margin: 0; padding: 20px 0; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 16px; }
+    header { text-align: center; margin-bottom: 32px; background: #a5d6a7; padding: 20px; border-radius: 8px; }
+    header img { width: 100px; margin-bottom: 12px; }
+    header h1 { font-size: 32px; color: #1b5e20; margin: 0; }
+    header p.subtitle { color: #2e7d32; margin-top: 8px; font-size: 16px; }
+    .question { background: #fff; padding: 16px; border-radius: 8px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .question h2 { margin: 0 0 8px; font-size: 18px; color: #2e7d32; }
+    .question p { margin: 0 0 12px; color: #1b5e20; }
+    .options { display: flex; gap: 16px; }
+    .options label { display: flex; align-items: center; gap: 4px; color: #1b5e20; cursor: pointer; }
+    .options input { margin: 0; }
+    button { display: block; width: 100%; max-width: 200px; margin: 24px auto; background: #388e3c; color: #fff; border: none; border-radius: 4px; padding: 12px; font-size: 16px; cursor: pointer; }
+    button:hover { background: #2e7d32; }
+    #result { background: #fff; padding: 20px; border-radius: 8px; margin-top: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    #result h2 { margin-top: 0; color: #1b5e20; }
+    #result p { color: #2e7d32; line-height: 1.5; }
+    .type-images { display: flex; justify-content: center; gap: 16px; margin: 16px 0; }
+    .type-images img { width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #2e7d32; }
+    ul.career-list { list-style: none; padding: 0; margin: 0; }
+    ul.career-list li { padding-left: 1.2em; text-indent: -1.2em; margin-bottom: 8px; color: #1b5e20; }
+    ul.career-list li:before { content: "•"; color: #388e3c; display: inline-block; width: 1em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="/mnt/data/f4d16e49-7069-48a9-b7cd-3e107972d6b8.png" alt="GREEN_Q 로고">
+      <h1>GREEN_Q</h1>
+      <p class="subtitle">기후·환경 진로 적성 검사를 기반으로 한 흥미 유형 진단</p>
+    </header>
+    <form id="careerTest">
+      <div id="questions"></div>
+      <button type="button" onclick="calculateResult()">결과 확인</button>
+    </form>
+    <div id="result" style="display:none;"></div>
+  </div>
+  <script>
+    const types = ['R','R','R','R','R','R','I','I','I','I','I','I','A','A','A','A','A','A','S','S','S','S','S','S','E','E','E','E','E','E','C','C','C','C','C','C'];
+    const questions = [
+      '집에서 사용할 전구를 LED로 바꾸는 방법을 직접 찾아서 설치해보고 싶다.',
+      '가족과 함께 주말에 근처 하천을 찾아 플로깅을 해본 적이 있다.',
+      '학교 과학실의 재활용 재료를 이용해 작은 태양광 모형을 만들어보고 싶다.',
+      '야외 활동 시 대체 교통수단(전동킥보드, 자전거) 이용 경험이 있다.',
+      '학교 텃밭에 자동급수 장치를 설치해 관리해본 경험이 있다.',
+      '버려진 페트병으로 화분을 만들어보거나 업사이클링 작업을 해본 적이 있다.',
+      '미세먼지, 온도, 습도 등 기상 정보를 수집해 엑셀이나 노트에 기록해 본 적이 있다.',
+      '지역 일일 전력 사용량 데이터를 확인하고 그래프로 분석해본 경험이 있다.',
+      '온라인에서 기후변화 보고서를 읽고 주요 원인을 정리해본 적이 있다.',
+      '휴대용 기상 관측 장비 키트를 직접 조립해 데이터를 측정한 경험이 있다.',
+      '학교 수업 중 나온 환경 이슈를 자신의 가설로 정리해 실험 계획을 세운 적이 있다.',
+      '주변 지역의 재생 에너지 사용 현황을 조사해 토론한 경험이 있다.',
+      '친환경 메시지가 담긴 포스터나 웹툰을 직접 기획·제작해본 경험이 있다.',
+      '자연의 소리(물소리, 새소리 등)를 녹음해 리믹스해본 적이 있다.',
+      'SNS에 올릴 짧은 환경 홍보 영상을 촬영·편집해본 경험이 있다.',
+      '업사이클링 작품을 전시하거나 친구들에게 설명해본 적이 있다.',
+      '환경 다큐멘터리의 스토리보드를 구상해본 경험이 있다.',
+      '환경 보호를 주제로 한 작은 연극이나 퍼포먼스를 기획해본 경험이 있다.',
+      '친구들과 함께 학교 앞 분리수거 캠페인을 기획·실행해본 경험이 있다.',
+      '지역 커뮤니티에서 청소년 환경 교육 워크숍을 참여하거나 진행해본 적이 있다.',
+      '환경 관련 온라인 서명 운동을 조사하고 동참해본 적이 있다.',
+      '초등학교 동생이나 이웃 아이들에게 환경 보호 방법을 알려준 적이 있다.',
+      '학교 행사에서 환경 퀴즈 코너를 만들어 운영해본 경험이 있다.',
+      'SNS에서 환경 보호 활동을 알리는 포스트를 작성해본 적이 있다.',
+      '친환경 상품 아이디어를 모아 친구들과 모의 창업 발표를 해본 적이 있다.',
+      '환경 동아리에서 예산을 계획하고 물품을 구매해본 경험이 있다.',
+      '지역 농산물 직거래 마켓을 기획해본 경험이 있다.',
+      '친환경 브랜드의 SNS 홍보 전략을 보고 개선안을 제안해본 적이 있다.',
+      '학교 축제에서 업사이클링 체험 부스를 기획·운영해본 경험이 있다.',
+      '탄소 저감 캠페인 기획서를 작성해본 경험이 있다.',
+      '분리수거 체크리스트를 만들어 주기적으로 점검해본 적이 있다.',
+      '환경 활동 기록을 엑셀이나 노트에 체계적으로 정리해본 경험이 있다.',
+      '환경 보고서를 작성하여 친구들에게 배포해본 적이 있다.',
+      '온실가스 배출량 계산기를 사용해 개인 배출량을 기록해본 적이 있다.',
+      '정해진 포맷에 맞추어 환경 정책 문서를 요약해본 경험이 있다.',
+      '학교 동아리 회의록을 작성하며 활동 내용을 관리해본 경험이 있다.'
+    ];
+    const careerMap = {
+      'R':['태양광 설치기사','생태 탐험가','재활용 기술자'],
+      'I':['기후 과학자','생태통계학자','수문학자'],
+      'A':['환경 작가','생태 다큐 제작자','친환경 제품 디자이너'],
+      'S':['환경 교육자','생태체험 강사','환경 NGO 활동가'],
+      'E':['ESG 마케터','친환경 창업가','환경 캠페인 기획자'],
+      'C':['환경 행정 공무원','탄소배출 보고서 담당자','폐기물 관리감독자']
+    };
+    const typeDescriptions = {
+      'R':'현실형(R): 실질적인 행동과 도구 사용을 통해 환경 보호를 실천하는 데 강점을 가집니다.',
+      'I':'탐구형(I): 데이터를 수집·분석하여 환경 문제의 원인을 분석하고 해결책을 모색하는 데 적합합니다.',
+      'A':'예술형(A): 창의적 표현과 콘텐츠 제작을 통해 환경 메시지를 효과적으로 전달합니다.',
+      'S':'사회형(S): 사람들과 협력하여 교육·캠페인을 통해 환경 의식을 확산시키는 역할에 강점이 있습니다.',
+      'E':'기업형(E): 기획력과 설득력을 바탕으로 환경 프로젝트를 주도하고 실행하는 데 능숙합니다.',
+      'C':'관습형(C): 체계적 기록과 관리 능력을 통해 환경 데이터와 정책을 정리·관리하는 데 뛰어납니다.'
+    };
+    document.addEventListener('DOMContentLoaded', () => {
+      const qContainer = document.getElementById('questions');
+      questions.forEach((text, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question';
+        qDiv.innerHTML = `<h2>문항 ${idx+1}</h2><p>${text}</p><div class="options">` +
+          ['1','2','3','4','5'].map(val =>
+            `<label><input type="radio" name="q${idx+1}" value="${val}">${val}</label>`
+          ).join('') + `</div>`;
+        qContainer.appendChild(qDiv);
+      });
+    });
+    function calculateResult() {
+      const scores = { R:0,I:0,A:0,S:0,E:0,C:0 };
+      const unanswered = [];
+      questions.forEach((_, idx) => {
+        const sel = document.querySelector(`input[name='q${idx+1}']:checked`);
+        if (!sel) unanswered.push(idx+1);
+        else scores[types[idx]] += +sel.value;
+      });
+      if (unanswered.length) {
+        alert(`모든 문항에 응답해주세요. (예: ${unanswered.slice(0,3).join(', ')}번)`);
+        return;
+      }
+      const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+      const top = [sorted[0][0], sorted[1][0]];
+      const resultDiv = document.getElementById('result');
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = `<h2>결과 확인</h2>
+        <p>🌱 당신의 흥미 유형: <strong>${top[0]}형 + ${top[1]}형</strong></p>
+        <p>${typeDescriptions[top[0]]}</p>
+        <p>${typeDescriptions[top[1]]}</p>
+        <div class="type-images">
+          <img src="/mnt/data/f4d16e49-7069-48a9-b7cd-3e107972d6b8.png" alt="${top[0]}형 아이콘">
+          <img src="/mnt/data/f4d16e49-7069-48a9-b7cd-3e107972d6b8.png" alt="${top[1]}형 아이콘">
+        </div>
+        <h3>🔍 추천 환경 진로</h3>
+        <ul class="career-list">
+          ${[...careerMap[top[0]], ...careerMap[top[1]]].map(job => `<li>${job}</li>`).join('')}
+        </ul>`;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>
