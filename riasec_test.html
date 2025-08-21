@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>환경 진로 유형 검사 (RIASEC)</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+    h1 { text-align: center; }
+    section { margin-bottom: 30px; }
+    .question { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>환경 진로 유형 검사 (RIASEC 기반)</h1>
+  <p>각 문항에 해당하면 체크하세요. 완료 후 '결과 보기' 버튼을 눌러 결과 유형을 확인해보세요.</p>
+  <form id="riasec-form">
+    <section>
+      <h2>현실형 (Realistic - R)</h2>
+      <div class="question"><input type="checkbox" name="R" value="1"> 야외에서 활동하는 것을 좋아한다.</div>
+      <div class="question"><input type="checkbox" name="R" value="1"> 동식물, 자연환경에 흥미가 있다.</div>
+      <div class="question"><input type="checkbox" name="R" value="1"> 환경정화나 정원 관리 활동을 즐긴다.</div>
+      <div class="question"><input type="checkbox" name="R" value="1"> 손으로 만드는 활동을 좋아한다.</div>
+      <div class="question"><input type="checkbox" name="R" value="1"> 농장·숲 등 현장 활동에 끌린다.</div>
+    </section>
+    <section>
+      <h2>탐구형 (Investigative - I)</h2>
+      <div class="question"><input type="checkbox" name="I" value="1"> 환경문제를 과학적으로 분석하고 싶다.</div>
+      <div class="question"><input type="checkbox" name="I" value="1"> 기후변화·생태계 문제에 관심이 있다.</div>
+      <div class="question"><input type="checkbox" name="I" value="1"> 실험이나 데이터를 다루는 활동을 좋아한다.</div>
+      <div class="question"><input type="checkbox" name="I" value="1"> 환경 관련 연구원이 되고 싶다.</div>
+      <div class="question"><input type="checkbox" name="I" value="1"> 환경과학, 생물, 지리에 관심이 많다.</div>
+    </section>
+    <section>
+      <h2>예술형 (Artistic - A)</h2>
+      <div class="question"><input type="checkbox" name="A" value="1"> 환경을 주제로 그림·글쓰기·영상 제작에 관심이 있다.</div>
+      <div class="question"><input type="checkbox" name="A" value="1"> 자연의 아름다움을 표현하는 것을 좋아한다.</div>
+      <div class="question"><input type="checkbox" name="A" value="1"> 전시나 퍼포먼스를 통해 환경을 알리고 싶다.</div>
+      <div class="question"><input type="checkbox" name="A" value="1"> 생태 디자인, 환경 콘텐츠에 끌린다.</div>
+      <div class="question"><input type="checkbox" name="A" value="1"> 창의적인 방식으로 환경문제를 해결하고 싶다.</div>
+    </section>
+    <section>
+      <h2>사회형 (Social - S)</h2>
+      <div class="question"><input type="checkbox" name="S" value="1"> 환경의 중요성을 사람들에게 알리는 것이 의미 있다.</div>
+      <div class="question"><input type="checkbox" name="S" value="1"> 환경 교육·캠페인에 참여하고 싶다.</div>
+      <div class="question"><input type="checkbox" name="S" value="1"> 다른 사람과 함께 환경활동을 즐긴다.</div>
+      <div class="question"><input type="checkbox" name="S" value="1"> 환경 상담사나 활동가에 관심 있다.</div>
+      <div class="question"><input type="checkbox" name="S" value="1"> 아이들에게 환경을 가르치는 것이 좋다.</div>
+    </section>
+    <section>
+      <h2>기업형 (Enterprising - E)</h2>
+      <div class="question"><input type="checkbox" name="E" value="1"> 환경 사업을 기획하고 싶다.</div>
+      <div class="question"><input type="checkbox" name="E" value="1"> 환경 스타트업, 친환경 제품에 관심 있다.</div>
+      <div class="question"><input type="checkbox" name="E" value="1"> 다른 사람을 이끌고 실천을 유도하고 싶다.</div>
+      <div class="question"><input type="checkbox" name="E" value="1"> 환경 관련 마케팅을 해보고 싶다.</div>
+      <div class="question"><input type="checkbox" name="E" value="1"> 지속 가능한 소비·생산에 관심 있다.</div>
+    </section>
+    <section>
+      <h2>관습형 (Conventional - C)</h2>
+      <div class="question"><input type="checkbox" name="C" value="1"> 자원순환, 분리배출 시스템 운영에 흥미 있다.</div>
+      <div class="question"><input type="checkbox" name="C" value="1"> 환경 문서 정리를 잘한다.</div>
+      <div class="question"><input type="checkbox" name="C" value="1"> 데이터를 정리해 보고서로 만드는 활동이 편하다.</div>
+      <div class="question"><input type="checkbox" name="C" value="1"> 환경 법규·절차에 관심 있다.</div>
+      <div class="question"><input type="checkbox" name="C" value="1"> 체계적 환경 모니터링이 적성에 맞다.</div>
+    </section>
+    <button type="button" onclick="showResult()">결과 보기</button>
+  </form>
+  <div id="result" style="margin-top:20px; font-size:1.2em;"></div>
+
+  <script>
+    function showResult() {
+      const form = document.getElementById('riasec-form');
+      const counts = { R:0, I:0, A:0, S:0, E:0, C:0 };
+      new FormData(form).forEach((v, k) => counts[k] += parseInt(v));
+      const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+      const top = sorted.slice(0,2).map(x => x[0] + "(" + x[1] + ")");
+      const description = {
+        R:"현장 활동형(생태해설가, 생태농부 등)",
+        I:"탐구형(환경과학자, 연구자 등)",
+        A:"예술형(홍보·디자인 등)",
+        S:"사회형(교육가·캠페이너 등)",
+        E:"기획형(환경창업가 등)",
+        C:"관리형(환경정책·행정 등)"
+      };
+      document.getElementById('result').innerHTML =
+        "당신의 유형: " + top.join(", ") + "<br>" +
+        "해석: " + top.map(t=>description[t.split("(")[0]]).join(", ");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .question-group-title {
+        color: #3b82f6;
+    }
+  </style>
+  <title>환경 진로 유형 검사 (심화 버전)</title>
+</head>
+<body class="bg-gray-100 p-6 flex flex-col items-center min-h-screen">
+  <div class="bg-white p-8 rounded-xl shadow-lg max-w-4xl w-full">
+    <h1 class="text-3xl font-bold text-center mb-4 text-blue-700">환경 진로 유형 검사</h1>
+    <p class="text-center text-gray-600 mb-6">아래 질문에 얼마나 동의하는지 선택하여 당신의 환경 진로 유형을 알아보세요.</p>
+    
+    <form id="mbti-form" class="space-y-8">
+      
+      <!-- E vs I -->
+      <section class="p-4 border border-gray-200 rounded-lg bg-blue-50">
+        <h2 class="text-xl font-semibold mb-2 question-group-title">에너지 방향: E(외향) vs I(내향)</h2>
+        <div class="space-y-4">
+          <div>
+            <p class="mb-2 font-medium text-gray-700">1. 환경 문제에 대한 정보를 사람들과 토론하며 얻는 것을 즐긴다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (I)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (E)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="ei1" value="-2" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei1" value="-1" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei1" value="0" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei1" value="1" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei1" value="2" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">2. 환경 보호 활동은 혼자 조용히 실천하는 것보다 여럿이 함께하는 것이 더 효과적이다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (I)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (E)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="ei2" value="-2" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei2" value="-1" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei2" value="0" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei2" value="1" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei2" value="2" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">3. 환경 캠페인처럼 사람들 앞에서 나의 의견을 표현하는 것에 거부감이 없다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (I)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (E)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="ei3" value="-2" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei3" value="-1" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei3" value="0" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei3" value="1" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei3" value="2" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">4. 환경문제 해결을 위해 새로운 사람들을 만나고 네트워킹 하는 것을 좋아한다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (I)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (E)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="ei4" value="-2" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei4" value="-1" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei4" value="0" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei4" value="1" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+              <label class="w-full"><input type="radio" name="ei4" value="2" class="w-full rounded-sm text-blue-600 focus:ring-blue-500"></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S vs N -->
+      <section class="p-4 border border-gray-200 rounded-lg bg-green-50">
+        <h2 class="text-xl font-semibold mb-2 text-green-800">인식 기능: S(감각) vs N(직관)</h2>
+        <div class="space-y-4">
+          <div>
+            <p class="mb-2 font-medium text-gray-700">5. 환경 데이터를 분석할 때, 구체적인 사실과 통계를 기반으로 문제를 해결하려 한다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (N)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (S)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="sn1" value="-2" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn1" value="-1" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn1" value="0" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn1" value="1" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn1" value="2" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">6. 환경 문제를 접할 때, 당장 눈앞의 문제보다 장기적인 영향과 미래의 가능성을 먼저 생각한다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (S)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (N)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="sn2" value="-2" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn2" value="-1" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn2" value="0" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn2" value="1" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn2" value="2" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">7. 새로운 친환경 기술이 도입될 때, 그 실현 가능성과 구체적인 작동 방식에 더 관심이 간다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (N)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (S)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="sn3" value="-2" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn3" value="-1" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn3" value="0" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn3" value="1" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn3" value="2" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">8. 환경 관련 프로젝트를 진행할 때, 혁신적인 아이디어를 자유롭게 탐색하는 것을 좋아한다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (S)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (N)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="sn4" value="-2" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn4" value="-1" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn4" value="0" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn4" value="1" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+              <label class="w-full"><input type="radio" name="sn4" value="2" class="w-full rounded-sm text-green-600 focus:ring-green-500"></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- T vs F -->
+      <section class="p-4 border border-gray-200 rounded-lg bg-red-50">
+        <h2 class="text-xl font-semibold mb-2 text-red-800">판단 기능: T(사고) vs F(감정)</h2>
+        <div class="space-y-4">
+          <div>
+            <p class="mb-2 font-medium text-gray-700">9. 환경 문제 해결 방안을 논의할 때, 객관적인 데이터와 논리적 타당성이 가장 중요하다고 생각한다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (F)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (T)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="tf1" value="-2" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf1" value="-1" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf1" value="0" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf1" value="1" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf1" value="2" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">10. 환경 오염 피해를 입은 지역의 사람들을 볼 때, 해결책보다 그들의 아픔에 공감하는 것이 우선이라고 생각한다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (T)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (F)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="tf2" value="-2" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf2" value="-1" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf2" value="0" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf2" value="1" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf2" value="2" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">11. 환경 캠페인을 기획할 때, 사람들의 감정적 동기 부여를 가장 중요하게 고려한다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (T)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (F)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="tf3" value="-2" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf3" value="-1" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf3" value="0" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf3" value="1" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf3" value="2" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">12. 환경보호 활동의 효과를 평가할 때, 사람들의 만족도보다 객관적인 수치(예: 탄소 배출량 감소)를 더 중요하게 여긴다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (F)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (T)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="tf4" value="-2" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf4" value="-1" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf4" value="0" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf4" value="1" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+              <label class="w-full"><input type="radio" name="tf4" value="2" class="w-full rounded-sm text-red-600 focus:ring-red-500"></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- J vs P -->
+      <section class="p-4 border border-gray-200 rounded-lg bg-purple-50">
+        <h2 class="text-xl font-semibold mb-2 text-purple-800">생활 양식: J(판단) vs P(인식)</h2>
+        <div class="space-y-4">
+          <div>
+            <p class="mb-2 font-medium text-gray-700">13. 환경 프로젝트를 시작하기 전에, 구체적인 목표와 계획을 세우는 것이 편하다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (P)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (J)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="jp1" value="-2" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp1" value="-1" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp1" value="0" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp1" value="1" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp1" value="2" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">14. 환경 보호 활동은 정해진 규칙이나 절차를 따르는 것이 중요하다고 생각한다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (P)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (J)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="jp2" value="-2" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp2" value="-1" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp2" value="0" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp2" value="1" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp2" value="2" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">15. 환경 프로젝트를 진행할 때, 계획을 수정하거나 즉흥적으로 아이디어를 추가하는 것을 즐긴다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (J)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (P)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="jp3" value="-2" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp3" value="-1" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp3" value="0" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp3" value="1" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp3" value="2" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+            </div>
+          </div>
+          <div>
+            <p class="mb-2 font-medium text-gray-700">16. 마감일에 쫓기는 상황에서도 더 좋은 방법을 찾기 위해 여러 가능성을 열어두는 편이다.</p>
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+              <span>매우 아니다 (J)</span>
+              <span>그렇지 않다</span>
+              <span>보통이다</span>
+              <span>그렇다</span>
+              <span>매우 그렇다 (P)</span>
+            </div>
+            <div class="flex justify-between space-x-2">
+              <label class="w-full"><input type="radio" name="jp4" value="-2" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp4" value="-1" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp4" value="0" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp4" value="1" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+              <label class="w-full"><input type="radio" name="jp4" value="2" class="w-full rounded-sm text-purple-600 focus:ring-purple-500"></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <button type="button" onclick="showResult()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-lg font-bold">결과 보기</button>
+    </form>
+    
+    <div id="result" class="mt-8 p-6 rounded-lg bg-gray-50 border border-gray-200">
+      <!-- 결과가 여기에 표시됩니다. -->
+    </div>
+  </div>
+
+  <script>
+    /**
+     * 검사 결과를 계산하고 표시하는 함수
+     */
+    function showResult() {
+      // MBTI 각 축별 점수를 계산합니다.
+      const form = document.getElementById('mbti-form');
+      const formData = new FormData(form);
+      
+      const scores = {
+        ei: 0,
+        sn: 0,
+        tf: 0,
+        jp: 0,
+      };
+
+      // 점수 합산 및 모든 질문에 대한 답변 여부 확인
+      let allAnswered = true;
+      for (let i = 1; i <= 4; i++) {
+        const eiValue = formData.get(`ei${i}`);
+        const snValue = formData.get(`sn${i}`);
+        const tfValue = formData.get(`tf${i}`);
+        const jpValue = formData.get(`jp${i}`);
+        
+        if (eiValue === null || snValue === null || tfValue === null || jpValue === null) {
+          allAnswered = false;
+          break;
+        }
+
+        scores.ei += parseInt(eiValue);
+        scores.sn += parseInt(snValue);
+        scores.tf += parseInt(tfValue);
+        scores.jp += parseInt(jpValue);
+      }
+      
+      if (!allAnswered) {
+        // 모든 질문에 답변하지 않았을 경우 경고 메시지 표시
+        const messageBox = document.createElement('div');
+        messageBox.innerHTML = `
+          <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-xl shadow-2xl p-6 text-center">
+              <h4 class="text-3xl font-bold text-red-700 mb-2">오류!</h4>
+              <p class="text-lg text-gray-700">모든 질문에 답해주세요.</p>
+              <button onclick="this.parentNode.parentNode.remove()" class="mt-4 bg-red-600 text-white py-2 px-4 rounded-lg">확인</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(messageBox);
+        return;
+      }
+      
+      // MBTI 유형을 결정합니다.
+      const type = 
+        (scores.ei > 0 ? 'E' : 'I') +
+        (scores.sn > 0 ? 'S' : 'N') +
+        (scores.tf > 0 ? 'T' : 'F') +
+        (scores.jp > 0 ? 'J' : 'P');
+
+      // MBTI 유형별 정보를 정의합니다.
+      const mbtiData = {
+        "ISTJ": {
+          description: "현실적이고 책임감이 강한 환경 관리자입니다. 구체적인 사실에 기반하여 환경 문제를 체계적으로 해결하는 것을 선호합니다.",
+          careers: ["환경 영향 평가 전문가", "친환경 제품 인증 평가사", "환경규제 법률전문가", "탄소 발자국 추적 전문가", "스마트 그리드 엔지니어", "환경정책 분석가", "환경 감사관", "기후변화 통계 전문가"],
+          majors: ["환경공학", "환경정책학과", "통계학과", "법학과"]
+        },
+        "ISFJ": {
+          description: "차분하고 배려심이 깊은 환경 보호자입니다. 사람들과 협력하며 지속적으로 환경을 보살피고 유지하는 일에 가치를 둡니다.",
+          careers: ["생태관광 기획자", "환경 교육 강사", "생태관광 해설가", "동식물 보호 관리인", "환경 정화 미생물 개발자", "지속가능한 건축 설계사"],
+          majors: ["생태학과", "환경교육학과", "조경학과", "지속가능성학과"]
+        },
+        "INFJ": {
+          description: "통찰력 있고 이상적인 환경 비전가입니다. 환경 문제의 근본적인 원인을 깊이 이해하고, 미래를 위한 의미 있는 변화를 이끌어내려 합니다.",
+          careers: ["환경운동가", "환경보호 NGO 활동가", "지속가능성 컨설턴트", "기후적응 컨설턴트", "기후금융전문가", "지속가능한 건축 설계사"],
+          majors: ["환경철학과", "사회학과", "환경정책학과", "경영학과"]
+        },
+        "INTJ": {
+          description: "분석적이고 전략적인 환경 전략가입니다. 복잡한 환경 문제에 대한 장기적인 해결책을 구상하고, 효율적으로 실행하는 것을 즐깁니다.",
+          careers: ["기후 복원력 분석가", "스마트시티 기후 관리자", "환경 AI 개발자", "기후 예측 모델러", "지속가능 에너지 시스템 설계자", "도시 열섬 완화 전문가"],
+          majors: ["기후학과", "도시공학과", "에너지공학과", "컴퓨터공학과"]
+        },
+        "ISTP": {
+          description: "논리적이고 실용적인 문제 해결사입니다. 현장에서 직접 도구와 기술을 활용하여 환경 문제를 해결하는 것을 좋아합니다.",
+          careers: ["수소 연료 전지 기술자", "재생에너지 시스템 설치 및 유지보수 개발자", "도시 열섬 완화 전문가", "에너지 저장 시스템 전문가", "담수화 시스템 엔지니어", "환경 정화 기술자", "재활용 시스템 엔지니어", "생태 복원 전문가"],
+          majors: ["기계공학과", "환경공학과", "지질학과", "신소재공학과"]
+        },
+        "ISFP": {
+          description: "유연하고 예술적인 환경 실천가입니다. 자연의 아름다움을 느끼고, 개인적인 경험과 감성을 담아 환경 보호 활동에 참여합니다.",
+          careers: ["업사이클링 제품 개발자", "순환경제 디자이너", "환경 VR/AR 콘텐츠 개발자", "생태관광 기획자", "생태 예술가", "식물 세밀화가"],
+          majors: ["환경디자인학과", "미술학과", "원예학과", "생태학과"]
+        },
+        "INFP": {
+          description: "호기심 많고 창의적인 환경 옹호자입니다. 자신만의 가치관에 따라 환경 보호의 중요성을 알리고, 새로운 아이디어로 사람들의 참여를 유도합니다.",
+          careers: ["기후 교육 게임 개발자", "환경 VR/AR 콘텐츠 개발자", "바이오플라스틱 개발자", "순환경제 디자이너", "환경 콘텐츠 크리에이터", "환경 저술가", "자연 보호 상담가"],
+          majors: ["문예창작학과", "심리학과", "환경교육학과", "생물학과"]
+        },
+        "INTP": {
+          description: "지적이고 독립적인 환경 연구자입니다. 복잡한 환경 과학 이론을 탐구하고, 새로운 기술이나 시스템을 개발하는 데 집중합니다.",
+          careers: ["탄소 포집 기술자", "환경 정화 미생물 개발자", "녹색 기술 연구원", "해양 산성화 모니터링 전문가", "환경 데이터 과학자", "생태계 분석 연구원", "지속가능 기술 연구원"],
+          majors: ["환경정보학과", "컴퓨터공학과", "생물학과", "화학공학과"]
+        },
+        "ESTP": {
+          description: "현실적이고 활동적인 환경 개척자입니다. 직접 발로 뛰며 환경 관련 프로젝트를 추진하고, 즉각적인 성과를 내는 것을 즐깁니다.",
+          careers: ["곤충양식 기술자", "수직농장 관리자", "폐기물 에너지화 연구원", "에너지 저장 시스템 전문가", "환경 오염 감시관", "자원봉사 코디네이터", "야생동물 구조 활동가"],
+          majors: ["환경안전공학과", "해양학과", "응급구조학과", "농업학과"]
+        },
+        "ESFP": {
+          description: "낙천적이고 사교적인 환경 홍보대사입니다. 사람들과 즐겁게 소통하며 환경 보호의 즐거움을 알리고, 긍정적인 에너지를 전파합니다.",
+          careers: ["생태관광 기획자", "기후 교육 게임 개발자", "업사이클링 제품 개발자", "환경 VR/AR 콘텐츠 개발자", "환경 행사 기획자", "환경 캠페인 마케터", "환경 해설사"],
+          majors: ["관광경영학과", "광고홍보학과", "이벤트기획학과"]
+        },
+        "ENFP": {
+          description: "열정적이고 상상력이 풍부한 환경 혁신가입니다. 다양한 사람들과 영감을 주고받으며 환경을 위한 새로운 아이디어와 프로젝트를 끊임없이 만들어냅니다.",
+          careers: ["업사이클링 창업가", "친환경 스타트업 기획자", "환경 커뮤니티 매니저", "기후적응 컨설턴트", "순환경제 디자이너", "바이오플라스틱 개발자"],
+          majors: ["경영학과", "사회적기업학과", "창업학과", "디자인학과"]
+        },
+        "ENTP": {
+          description: "영리하고 도전적인 환경 전략가입니다. 기존의 방식에 얽매이지 않고, 논리적인 토론과 혁신적인 아이디어로 환경 문제를 해결하려 합니다.",
+          careers: ["스마트시티 기후 관리자", "환경 AI 개발자", "스마트 그리드 엔지니어", "기후 예측 모델러", "환경 컨설턴트", "지속가능성 전략가", "미래학자"],
+          majors: ["도시계획학과", "경영컨설팅학과", "산업공학과", "공공행정학과"]
+        },
+        "ESTJ": {
+          description: "실용적이고 조직적인 환경 관리자입니다. 명확한 규칙과 절차에 따라 환경 관련 시스템을 효율적으로 관리하고 운영합니다.",
+          careers: ["환경 영향 평가 전문가", "탄소 발자국 추적 전문가", "환경규제 법률전문가", "친환경 제품 인증 평가사", "환경규제 공무원", "폐기물 관리 감독관"],
+          majors: ["행정학과", "법학과", "도시공학과", "경영학과"]
+        },
+        "ESFJ": {
+          description: "친절하고 협력적인 환경 활동가입니다. 공동체 안에서 사람들과 함께 환경 보호 활동을 이끌고, 조화로운 관계를 중시합니다.",
+          careers: ["생태관광 기획자", "기후적응 컨설턴트", "지속가능한 건축 설계사", "환경 정화 미생물 개발자", "환경보호 단체 행정가", "지역사회 환경운동가", "환경정화 봉사 기획자"],
+          majors: ["사회복지학과", "교육학과", "행정학과", "환경교육학과"]
+        },
+        "ENFJ": {
+          description: "따뜻하고 카리스마 있는 환경 리더입니다. 사람들의 잠재력을 이끌어내어 함께 환경을 위한 긍정적인 변화를 만들어갑니다.",
+          careers: ["기후적응 컨설턴트", "지속가능한 건축 설계사", "기후금융전문가", "환경 VR/AR 콘텐츠 개발자", "환경정책가", "환경교육 전문 강사", "기업 사회공헌(CSR) 담당자"],
+          majors: ["정치외교학과", "교육학과", "사회복지학과", "리더십학과"]
+        },
+        "ENTJ": {
+          description: "결단력 있고 통솔력 있는 환경 경영인입니다. 큰 그림을 보며 환경 비즈니스를 주도하고, 목표 달성을 위해 사람들을 이끌어갑니다.",
+          careers: ["스마트시티 기후 관리자", "환경 AI 개발자", "스마트 그리드 엔지니어", "기후 복원력 분석가", "환경 기술 기업 CEO", "재생에너지 사업 개발자", "기후변화 대응 리더"],
+          majors: ["환경공학", "경영학과", "행정학과", "경제학과"]
+        },
+      };
+
+      // 결과 표시
+      const resultData = mbtiData[type];
+      const resultElement = document.getElementById('result');
+      if (resultData) {
+        let resultText = "<h3 class='text-2xl font-bold mb-4 text-center text-blue-700'>당신의 결과는...</h3>";
+        resultText += `<div class='text-center text-xl font-semibold mb-4'>당신의 환경 진로 유형은 <span class='text-blue-600'>${type}</span> 입니다!</div>`;
+        
+        resultText += "<div class='p-4 bg-white rounded-lg shadow mb-4'>";
+        resultText += `<p class='font-bold text-gray-700 mb-2'>유형 설명:</p>`;
+        resultText += `<p>${resultData.description}</p>`;
+        resultText += "</div>";
+
+        resultText += "<p class='font-bold text-gray-700 mb-2'>추천 진로 직업:</p>\n<ul class='list-disc list-inside space-y-1 text-gray-600 mb-4'>";
+        resultData.careers.forEach(job => {
+          resultText += `<li>${job}</li>`;
+        });
+        resultText += "</ul>";
+        
+        resultText += "<p class='font-bold text-gray-700 mb-2'>추천 학과:</p>\n<ul class='list-disc list-inside space-y-1 text-gray-600'>";
+        resultData.majors.forEach(major => {
+          resultText += `<li>${major}</li>`;
+        });
+        resultText += "</ul>";
+        resultElement.innerHTML = resultText;
+      } else {
+        resultElement.innerHTML = "<p class='text-center text-red-500'>모든 문항에 답변해주세요.</p>";
+      }
+    }
+  </script>
+</body>
+</html>
